@@ -4,6 +4,7 @@ import net.qsef1256.capstone2022server.api.enums.ContentType;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -12,7 +13,9 @@ import java.net.URL;
 /**
  * 공공 API Connector, 비동기 처리
  */
-public class APIConnector implements AutoCloseable {
+public class APIConnector implements AutoCloseable, Closeable {
+
+    // TODO: check memory leak
 
     private HttpURLConnection connection;
     private BufferedReader bufferedReader;

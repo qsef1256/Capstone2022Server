@@ -44,7 +44,7 @@ public class JpaManager {
         EntityManager entityManager = threadLocal.get();
         if (entityManager != null) {
             entityManager.close();
-            threadLocal.set(null);
+            threadLocal.remove();
         }
     }
 

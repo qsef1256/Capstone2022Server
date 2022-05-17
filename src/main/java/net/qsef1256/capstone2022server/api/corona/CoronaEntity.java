@@ -1,5 +1,6 @@
 package net.qsef1256.capstone2022server.api.corona;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.ToString;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 public class CoronaEntity {
 
     @Id
+    @JsonIgnore
     @GsonExclude
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
