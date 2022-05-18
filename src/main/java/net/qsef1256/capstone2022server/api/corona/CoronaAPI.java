@@ -28,7 +28,6 @@ public class CoronaAPI {
 
     static {
         new CoronaAPI().update();
-        DiaScheduler.executePerTime(() -> new CoronaAPI().update(), 12, 0, 0); // 정각 12시 업데이트
     }
 
     /**
@@ -43,7 +42,7 @@ public class CoronaAPI {
             return;
         }
 
-        System.out.println("Corona data updated called");
+        log.info("Corona data updated called");
         String key = PropertiesUtil.loadFile("key").getProperty("corona.token");
         String startDate = LocalDateTime.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String endDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));

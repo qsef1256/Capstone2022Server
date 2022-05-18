@@ -41,6 +41,10 @@
         <location>/error.html</location>
     </error-page>
 
+    <listener>
+        <listener-class>net.qsef1256.capstone2022server.ContextStopListener</listener-class>
+    </listener>
+
     <!-- TODO: remove this -->
     <!-- localhost ip filter -->
     <filter>

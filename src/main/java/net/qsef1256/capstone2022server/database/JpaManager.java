@@ -23,6 +23,8 @@ public class JpaManager {
             log.error(e.getMessage());
             throw new ExceptionInInitializerError(e);
         }
+
+        Runtime.getRuntime().addShutdownHook(new Thread(JpaManager::shutdown));
     }
 
     /**
@@ -50,6 +52,7 @@ public class JpaManager {
 
     public static void shutdown() {
         entityManagerFactory.close();
+        threadLocal.remove();
     }
 
 }

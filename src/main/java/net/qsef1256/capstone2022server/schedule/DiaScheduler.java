@@ -1,6 +1,7 @@
 package net.qsef1256.capstone2022server.schedule;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,12 +21,17 @@ import java.util.concurrent.TimeUnit;
  * @implNote call shutdown() at stop
  * @see <a href=https://alwayspr.tistory.com/32>See Reference</a>
  */
+@Slf4j
 public class DiaScheduler {
 
     private static final ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
 
     @Getter
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+    static {
+        Runtime.getRuntime().addShutdownHook(new Thread(DiaScheduler::shutdown));
+    }
 
     /**
      * 자정에 스케줄을 실행합니다.
@@ -36,7 +42,6 @@ public class DiaScheduler {
         executePerTime(runnable, 0, 0, 0);
     }
 
-    // TODO: FIX this
     /**
      * 지정된 시간에 스케줄을 실행합니다.
      *
@@ -48,7 +53,14 @@ public class DiaScheduler {
     public static void executePerTime(Runnable runnable, int hour, int minute, int second) {
         ZonedDateTime nextExecutionTime = getNextExecutionTime(hour, minute, second);
 
-        scheduler.scheduleAtFixedRate(runnable, getInitialExecutionTime(nextExecutionTime), 1, TimeUnit.DAYS);
+        long delay = getDiffFromNow(nextExecutionTime);
+        scheduler.scheduleAtFixedRate(() -> {
+            try {
+                runnable.run();
+            } catch (Exception e) {
+                log.error("Failed to execute task", e);
+            }
+        }, delay, TimeUnit.DAYS.toSeconds(1), TimeUnit.SECONDS);
     }
 
     private static ZonedDateTime getNextExecutionTime(int hour, int minute, int second) {
@@ -63,7 +75,7 @@ public class DiaScheduler {
         return now.compareTo(nextExecutionTime) > 0;
     }
 
-    private static long getInitialExecutionTime(ZonedDateTime nextExecutionTime) {
+    private static long getDiffFromNow(ZonedDateTime nextExecutionTime) {
         return Duration.between(now, nextExecutionTime).getSeconds();
     }
 
