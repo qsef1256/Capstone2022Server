@@ -38,7 +38,7 @@
     </security-constraint>
 
     <error-page>
-        <location>/error.html</location>
+        <location>/error.jsp</location>
     </error-page>
 
     <listener>
