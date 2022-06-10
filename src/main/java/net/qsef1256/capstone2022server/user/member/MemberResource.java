@@ -1,9 +1,6 @@
 package net.qsef1256.capstone2022server.user.member;
 
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import net.qsef1256.capstone2022server.database.DaoCommonJpaImpl;
 
@@ -17,6 +14,17 @@ public class MemberResource {
     @Produces(MediaType.APPLICATION_JSON)
     public MemberEntity getMember(@PathParam("id") Long memberId) {
         return memberDao.findById(memberId);
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addContact(MemberEntity entity) {
+        memberDao.save(entity);
+    }
+
+    @DELETE
+    public void removeContact(MemberEntity member) {
+        memberDao.delete(member);
     }
 
 }
