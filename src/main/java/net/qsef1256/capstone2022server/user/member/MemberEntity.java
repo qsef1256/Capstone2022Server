@@ -19,11 +19,7 @@ import java.util.UUID;
 public class MemberEntity {
 
     @Id
-    @GeneratedValue
     private UUID id;
-    private String name;
-    private String phoneNo;
-    private String address;
 
     @Embedded
     private MemberCoronaInfo coronaInfo;

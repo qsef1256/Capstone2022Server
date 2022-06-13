@@ -18,7 +18,6 @@ import java.util.UUID;
 public class ContactEntity {
 
     @Id
-    @GeneratedValue
     private UUID id;
     private String name;
     private String phoneNo;
