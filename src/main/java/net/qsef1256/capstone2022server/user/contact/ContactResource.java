@@ -3,16 +3,19 @@ package net.qsef1256.capstone2022server.user.contact;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import net.qsef1256.capstone2022server.database.DaoCommonJpaImpl;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.UUID;
 
 @Path("contact")
 public class ContactResource {
 
-    private static final DaoCommonJpaImpl<ContactEntity, Long> contactDao = new DaoCommonJpaImpl<>(ContactEntity.class);
+    private static final DaoCommonJpaImpl<ContactEntity, UUID> contactDao = new DaoCommonJpaImpl<>(ContactEntity.class);
 
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public ContactEntity getContact(@PathParam("id") Long contactId) {
+    public ContactEntity getContact(@PathParam("id") UUID contactId) {
         return contactDao.findById(contactId);
     }
 
@@ -22,16 +25,17 @@ public class ContactResource {
         contactDao.save(entity);
     }
 
+    // TODO: test patch
     @PATCH
     @Consumes(MediaType.APPLICATION_JSON)
-    public void patchContact(ContactEntity entity) {
+    public void patchContact(@NotNull ContactEntity entity) {
         ContactEntity target = contactDao.findById(entity.getId());
 
-        contactDao.save(target.toBuilder()
-                .name(entity.getName())
-                .phoneNo(entity.getPhoneNo())
-                .coronaInfo(entity.getCoronaInfo())
-                .build());
+        contactDao.save(target
+                .setName(entity.getName())
+                .setPhoneNo(entity.getPhoneNo())
+                .setCoronaInfo(entity.getCoronaInfo())
+        );
     }
 
     @DELETE

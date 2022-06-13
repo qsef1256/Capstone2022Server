@@ -4,6 +4,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ContactResourceTest {
@@ -13,13 +15,12 @@ class ContactResourceTest {
     @BeforeAll
     static void setUp() {
         ContactEntity.ContactCoronaInfo testContactInfo = new ContactEntity.ContactCoronaInfo();
-        testContactInfo.setCloseContact("Y");
+        testContactInfo.setCloseContact(true);
 
-        testContact = ContactEntity.builder()
-                .id(-1L)
-                .name("테스트")
-                .coronaInfo(testContactInfo)
-                .build();
+        testContact = new ContactEntity()
+                .setId(UUID.randomUUID())
+                .setName("테스트")
+                .setCoronaInfo(testContactInfo);
     }
 
     @AfterEach
