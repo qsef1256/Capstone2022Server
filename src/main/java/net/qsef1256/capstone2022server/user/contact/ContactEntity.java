@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Entity
@@ -18,7 +19,7 @@ public class ContactEntity {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private UUID id;
     private String name;
     private String phoneNo;
 
@@ -30,8 +31,8 @@ public class ContactEntity {
         private LocalDateTime confirmationDate;
         private LocalDateTime finalVaccineDate;
         private LocalDateTime quarantineReleaseDate;
-        private String overseasEntry;
-        private String closeContact;
+        private boolean overseasEntry;
+        private boolean closeContact;
     }
 
 }

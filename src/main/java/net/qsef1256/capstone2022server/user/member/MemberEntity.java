@@ -10,6 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -19,7 +20,7 @@ public class MemberEntity {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private UUID id;
     private String name;
     private String phoneNo;
     private String address;
