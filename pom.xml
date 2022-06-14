@@ -162,9 +162,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.tananaev</groupId>
-            <artifactId>json-patch</artifactId>
-            <version>1.2</version>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>3.1.0</version>
         </dependency>
 
         <dependency>
