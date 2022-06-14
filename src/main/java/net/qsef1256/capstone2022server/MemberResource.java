@@ -1,7 +1,8 @@
-package net.qsef1256.capstone2022server.user.member;
+package net.qsef1256.capstone2022server;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import net.qsef1256.capstone2022server.data.MemberEntity;
 import net.qsef1256.capstone2022server.database.DaoCommonJpaImpl;
 
 import java.util.UUID;

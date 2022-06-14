@@ -1,4 +1,4 @@
-package net.qsef1256.capstone2022server.user.member;
+package net.qsef1256.capstone2022server.data;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;

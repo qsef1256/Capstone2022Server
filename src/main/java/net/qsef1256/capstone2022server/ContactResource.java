@@ -1,8 +1,10 @@
-package net.qsef1256.capstone2022server.user.contact;
+package net.qsef1256.capstone2022server;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import net.qsef1256.capstone2022server.data.ContactEntity;
 import net.qsef1256.capstone2022server.database.DaoCommonJpaImpl;
+import net.qsef1256.capstone2022server.util.GsonUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;

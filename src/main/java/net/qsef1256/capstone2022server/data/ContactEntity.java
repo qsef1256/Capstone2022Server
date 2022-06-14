@@ -1,4 +1,4 @@
-package net.qsef1256.capstone2022server.user.contact;
+package net.qsef1256.capstone2022server.data;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -28,7 +28,7 @@ public class ContactEntity {
     private ContactCoronaInfo coronaInfo;
 
     @Data
-    static class ContactCoronaInfo {
+    public static class ContactCoronaInfo {
         private LocalDateTime confirmationDate;
         private LocalDateTime finalVaccineDate;
         private LocalDateTime quarantineReleaseDate;
