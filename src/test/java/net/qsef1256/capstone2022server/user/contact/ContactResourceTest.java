@@ -14,7 +14,7 @@ class ContactResourceTest {
 
     private static ContactEntity testContact;
 
-    private static UUID testUUID = UUID.randomUUID();
+    private static final UUID testUUID = UUID.randomUUID();
 
     @BeforeAll
     static void setUp() {
@@ -30,7 +30,7 @@ class ContactResourceTest {
 
     @AfterEach
     void clean() {
-        new ContactResource().removeContact(testContact);
+        new ContactResource().removeContact(testUUID);
     }
 
     @Test
