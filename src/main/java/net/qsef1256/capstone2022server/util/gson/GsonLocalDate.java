@@ -27,12 +27,12 @@ public class GsonLocalDate implements JsonSerializer<LocalDate>, JsonDeserialize
     @Override
     public LocalDate deserialize(@NotNull JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
         String ldtString = jsonElement.getAsString();
-        return LocalDate.parse(ldtString,DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        return LocalDate.parse(ldtString,DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
     @Override
     public JsonElement serialize(@NotNull LocalDate localDateTime, Type type, JsonSerializationContext jsonSerializationContext) {
-        return new JsonPrimitive(localDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        return new JsonPrimitive(localDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE));
     }
 
 }

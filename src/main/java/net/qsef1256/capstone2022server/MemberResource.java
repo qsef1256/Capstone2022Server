@@ -2,7 +2,7 @@ package net.qsef1256.capstone2022server;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import net.qsef1256.capstone2022server.data.ContactEntity;
+import lombok.extern.slf4j.Slf4j;
 import net.qsef1256.capstone2022server.data.MemberEntity;
 import net.qsef1256.capstone2022server.database.DaoCommonJpaImpl;
 import net.qsef1256.capstone2022server.service.ModelMapperService;
@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+@Slf4j
 @Path("member")
 public class MemberResource {
 
@@ -25,23 +26,36 @@ public class MemberResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void addContact(MemberEntity entity) {
-        memberDao.save(entity);
+        memberDao.open();
+
+        memberDao.saveAndClose(entity);
     }
 
     @PATCH
     @Consumes(MediaType.APPLICATION_JSON)
     public void patchContact(@NotNull MemberEntity entity) {
-        MemberEntity target = memberDao.findById(entity.getId());
+        log.info("patch received: " + entity);
+        memberDao.open();
 
-        ModelMapperService.get().map(target, entity);
+        MemberEntity target = memberDao.existsById(entity.getUuid())
+                ? memberDao.findById(entity.getUuid())
+                : new MemberEntity();
 
-        memberDao.save(target);
+        log.info("target: " + target);
+
+        ModelMapperService.get().map(entity, target);
+
+        log.info("target after mapping: " + target);
+
+        memberDao.saveAndClose(target);
     }
 
     @DELETE
     @Path("{id}")
     public void removeContact(@PathParam("id") UUID id) {
+        memberDao.open();
         memberDao.deleteById(id);
+        memberDao.close();
     }
 
 }

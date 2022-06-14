@@ -5,9 +5,7 @@ import jakarta.ws.rs.core.MediaType;
 import net.qsef1256.capstone2022server.data.ContactEntity;
 import net.qsef1256.capstone2022server.database.DaoCommonJpaImpl;
 import net.qsef1256.capstone2022server.service.ModelMapperService;
-import net.qsef1256.capstone2022server.util.GsonUtil;
 import org.jetbrains.annotations.NotNull;
-import org.modelmapper.ModelMapper;
 
 import java.util.UUID;
 
@@ -29,11 +27,10 @@ public class ContactResource {
         contactDao.save(entity);
     }
 
-    // TODO: test patch
     @PATCH
     @Consumes(MediaType.APPLICATION_JSON)
     public void patchContact(@NotNull ContactEntity entity) {
-        ContactEntity target = contactDao.findById(entity.getId());
+        ContactEntity target = contactDao.findById(entity.getUuid());
 
         ModelMapperService.get().map(target, entity);
 

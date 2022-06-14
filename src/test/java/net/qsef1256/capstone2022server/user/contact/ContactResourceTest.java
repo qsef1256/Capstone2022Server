@@ -23,7 +23,7 @@ class ContactResourceTest {
         testContactInfo.setOverseasEntry(true);
 
         testContact = new ContactEntity()
-                .setId(testUUID)
+                .setUuid(testUUID)
                 .setName("test")
                 .setCoronaInfo(testContactInfo);
     }
@@ -38,7 +38,7 @@ class ContactResourceTest {
         ContactResource resource = new ContactResource();
         resource.addContact(testContact);
         ContactEntity afterContact = new ContactEntity()
-                .setId(testUUID)
+                .setUuid(testUUID)
                 .setName("aftertest")
                 .setCoronaInfo(new ContactEntity.ContactCoronaInfo().setCloseContact(false));
 

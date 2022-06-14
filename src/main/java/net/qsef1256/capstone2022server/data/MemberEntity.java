@@ -1,15 +1,12 @@
 package net.qsef1256.capstone2022server.data;
 
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter
@@ -19,16 +16,15 @@ import java.util.UUID;
 public class MemberEntity {
 
     @Id
-    private UUID id;
+    private UUID uuid;
 
-    @Embedded
-    private MemberCoronaInfo coronaInfo;
-
-    @Data
-    static class MemberCoronaInfo {
-        private LocalDateTime confirmationDate;
-        private LocalDateTime finalVaccineDate;
-        private LocalDateTime quarantineReleaseDate;
-    }
+    private int vaccineCount;
+    private String hospitalName;
+    private String hospitalContact;
+    private LocalDate vaccineDate;
+    private LocalDate confirmDate;
+    private boolean kitPositive; // 자가진단키트 양성
+    private boolean fastPositive; // 신속항원검사 양성
+    private boolean pcrPositive; // PCR 양성
 
 }

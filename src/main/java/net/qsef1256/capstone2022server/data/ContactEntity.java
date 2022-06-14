@@ -20,7 +20,7 @@ import java.util.UUID;
 public class ContactEntity {
 
     @Id
-    private UUID id;
+    private UUID uuid;
     private String name;
     private String phoneNo;
 
@@ -31,7 +31,6 @@ public class ContactEntity {
     public static class ContactCoronaInfo {
         private LocalDateTime confirmationDate;
         private LocalDateTime finalVaccineDate;
-        private LocalDateTime quarantineReleaseDate;
         private boolean overseasEntry;
         private boolean closeContact;
     }
@@ -41,7 +40,7 @@ public class ContactEntity {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         ContactEntity that = (ContactEntity) o;
-        return id != null && Objects.equals(id, that.id);
+        return uuid != null && Objects.equals(uuid, that.uuid);
     }
 
     @Override
