@@ -23,15 +23,12 @@ public class GsonUtil {
     @Getter
     private static final Gson gsonNull = getGsonBuilder().serializeNulls().create();
 
-    @NotNull
-    private GsonBuilder getGsonBuilder() {
-        return new GsonBuilder()
-                .disableHtmlEscaping()
-                .setPrettyPrinting()
-                .registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTime())
-                .registerTypeAdapter(LocalDate.class, new GsonLocalDate())
-                .setExclusionStrategies(new GsonExcludeStrategy());
-    }
+    @Getter
+    private static final GsonBuilder gsonBuilder = new GsonBuilder()
+            .setPrettyPrinting()
+            .registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTime())
+            .registerTypeAdapter(LocalDate.class, new GsonLocalDate())
+            .setExclusionStrategies(new GsonExcludeStrategy());
 
     public String parsePretty(String inputString) {
         final JsonObject inputJson = gson.fromJson(inputString, JsonObject.class);
